@@ -8,11 +8,11 @@ fi
 
 if [ "$1" = "purge" ]; then
     for config_file in "config.json" "use_authbind"; do
-        rm -f /etc/poker-terminator-front/$config_file
+        rm -f /etc/poker-terminator/$config_file
     done
     if which ucf >/dev/null 2>&1; then
-        ucf --purge /etc/poker-terminator-front/config.json
-        ucfr --purge poker-terminator-front /etc/poker-terminator-front/config.json
+        ucf --purge /etc/poker-terminator/config.json
+        ucfr --purge poker-terminator /etc/poker-terminator/config.json
     fi
 fi
 

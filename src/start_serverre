@@ -5,9 +5,9 @@ BASE_PATH="$(dirname $0)"
 FOREVER="${BASE_PATH}/node_modules/.bin/forever"
 COFFEE="${BASE_PATH}/node_modules/.bin/coffee"
 AUTHBIND=$(which authbind)
-PIDFILE="/var/run/poker-terminator-front.pid"
+PIDFILE="/var/run/poker-terminator.pid"
 
-USE_AUTHBIND=$(cat /etc/poker-terminator-front/use_authbind) || exit 1
+USE_AUTHBIND=$(cat /etc/poker-terminator/use_authbind) || exit 1
 
 LOGFILE="$1"
 LOG_TO_SYSLOG="$2"
@@ -32,7 +32,7 @@ OLD_PID=$(cat "$PIDFILE")
 if [ $USE_AUTHBIND -eq 1 ]; then
 	 FOREVER="$AUTHBIND --deep $FOREVER"
 elif [ $USE_AUTHBIND -ne 0 ]; then
-	echo "error validating authbind usage in /etc/poker-terminator-front/use_authbind. 0 or 1 are valid values"
+	echo "error validating authbind usage in /etc/poker-terminator/use_authbind. 0 or 1 are valid values"
 	exit 1
 fi
 
@@ -49,8 +49,8 @@ if [ $LOG_TO_SYSLOG -eq 1 ]; then
 	$FOREVER start \
 		-a \
 		-l >(logger -t forever -p user.info) \
-		-o >(logger -t poker-terminator-front -p user.info) \
-		-e >(logger -t poker-terminator-front -p user.error) \
+		-o >(logger -t poker-terminator -p user.info) \
+		-e >(logger -t poker-terminator -p user.error) \
 		$FOREVER_COMMON_ARGS
 else
 	$FOREVER start \
