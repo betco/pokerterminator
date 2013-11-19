@@ -1,0 +1,16 @@
+#!/bin/bash -e
+
+BASE_PATH="$(dirname $0)"
+FOREVER="${BASE_PATH}/node_modules/.bin/forever"
+PIDFILE="/var/run/poker-terminator.pid"
+
+LOGFILE="$1"
+LOG_TO_SYSLOG="$2"
+
+cd $BASE_PATH
+$FOREVER stop \
+	--sourceDir $BASE_PATH \
+	server.coffee
+
+# the user cannot remove the pid file, but he can at least empty it.
+echo "" > $PIDFILE

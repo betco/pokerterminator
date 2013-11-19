@@ -1,0 +1,10 @@
+Source: pokerterminator
+Section: web
+Priority: optional
+Maintainer: Hannes Uebelacker <hannes@pokermania.de>
+Build-Depends: debhelper (>= 7), nodejs (>=0.8)
+
+Package: poker-terminator
+Architecture: any
+Depends: ${misc:Depends}, ${shlibs:Depends}, nodejs (>=0.8), authbind (>=1.2.0), inotify-tools (>=3.13)
+Description: poker-terminator

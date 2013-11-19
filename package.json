@@ -1,0 +1,17 @@
+{
+  "author": "Hannes Uebelacker <hannes@pokermania.de>",
+  "name": "poker-terminator",
+  "version": "0.1.0",
+  "repository": {
+    "url": "git@projects.pokermania.de:pokerterminator.git"
+  },
+  "dependencies": {
+    "coffee-script": "*",
+    "connect": "*",
+    "debug": "*",
+    "msgpack": "*",
+    "engine.ns.io": "git://github.com/pokermania/engine.ns.io.git",
+    "engine.ns.io-client": "git://github.com/pokermania/engine.ns.io-client.git",
+    "forever": "*"
+  }
+}
