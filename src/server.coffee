@@ -52,6 +52,7 @@ io_server.on 'connection', (io_socket) ->
         io_socket.close()
 
     network.on 'error', (err) ->
+        console.log err
         io_socket.send_ns 'err', err
         network.destroy()
         io_socket.close()
