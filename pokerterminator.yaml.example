@@ -1,0 +1,11 @@
+http:
+    port: 8080
+    static: public/
+
+eio:
+    path: /ns.io
+    transports: [polling, websocket]
+
+network:
+    address: localhost
+    port: 19387
