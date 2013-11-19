@@ -45,14 +45,21 @@ io_server.on 'connection', (io_socket) ->
             delete packet['type']
             network.write(msgpack.pack([p_type, packet]))
 
+    io_socket.on 'error', (err) ->
+        console.log 'io_socket.err:', err
+        io_socket.close()
+        network.destroy()
+
     io_socket.on 'close', ->
+        console.log 'io_socket.close'
         network.destroy()
 
     network.on 'close', ->
+        console.log 'network.close'
         io_socket.close()
 
     network.on 'error', (err) ->
-        console.log err
+        console.log 'network.error:', err
         io_socket.send_ns 'err', err
         network.destroy()
         io_socket.close()
