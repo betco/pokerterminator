@@ -12,6 +12,8 @@
     "msgpack": "*",
     "engine.ns.io": "git://github.com/pokermania/engine.ns.io.git",
     "engine.ns.io-client": "git://github.com/pokermania/engine.ns.io-client.git",
-    "forever": "*"
+    "forever": "*",
+    "component": "*",
+    "js-yaml": "*"
   }
 }

@@ -3,22 +3,37 @@ msgpack = require 'msgpack'
 io = require 'engine.ns.io'
 net = require 'net'
 connect = require 'connect'
+yaml = require 'js-yaml'
+fs = require 'fs'
+
+# find config
+if fs.existsSync '/etc/pokerterminator.yaml'
+    config_path = '/etc/pokerterminator.yaml'
+else if fs.existsSync 'pokerterminator.yaml'
+    config_path = 'pokerterminator.yaml'
+else
+    console.log 'config not found!'
+    process.exit 1
+
+# load it
+console.log 'loading config:', config_path
+config = yaml.load fs.readFileSync(config_path).toString()
 
 # host public files
 httpd = connect()
     .use(connect.compress())
-    .use(connect.static('public/', {maxAge: 315360000}))
-    .listen(8080)
+    .use(connect.static(config.http.static, {maxAge: 315360000}))
+    .listen(config.http.port)
 
 # the actual feature
 io_server = io.attach httpd,
-    path: '/ns.io'
-    transports: ['polling', 'websocket']
+    path: config.eio.path
+    transports: config.eio.transports
 
 io_server.on 'connection', (io_socket) ->
-    network = net.connect 19387, 'localhost'
+    network = net.connect config.network
 
-    unpacker = new msgpack.Stream(network)
+    unpacker = new msgpack.Stream network
     unpacker.addListener 'msg', (m) ->
         [p_type, p_dict] = m
         p_dict['type'] = p_type

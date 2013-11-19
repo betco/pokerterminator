@@ -6,7 +6,6 @@ all: npm_install public/engine.ns.io-client.js
 
 npm_install:
 	npm install
-	npm install component
 
 node_modules/engine.ns.io-client/build/engine.ns.io-client.js:
 	make -BC node_modules/engine.ns.io-client build
