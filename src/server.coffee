@@ -27,8 +27,8 @@ httpd = connect()
 
 # drop privileges (root only)
 if process.getuid() == 0
-    process.setuid(config.setuid) && console.log 'setuid:', config.setuid if config.setuid
     process.setgid(config.setgid) && console.log 'setgid:', config.setgid if config.setgid
+    process.setuid(config.setuid) && console.log 'setuid:', config.setuid if config.setuid
 
 # the actual feature
 io_server = io.attach httpd,
