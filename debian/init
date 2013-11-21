@@ -9,7 +9,7 @@
 # Description:       starts poker-terminator using start-stop-daemon
 ### END INIT INFO
 
-PATH=/sbin:/bin:/usr/sbin:/usr/bin
+PATH=/sbin:/bin:/usr/sbin:/usr/bin:/usr/local/bin
 
 COFFEE=/usr/lib/poker-terminator/node_modules/.bin/coffee
 DAEMON=/usr/lib/poker-terminator/server.coffee
