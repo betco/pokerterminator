@@ -11,39 +11,38 @@
 
 PATH=/sbin:/bin:/usr/sbin:/usr/bin
 
-DAEMON=/usr/lib/poker-terminator/node_modules/.bin/coffee -- /usr/lib/poker-terminator/server.coffee
-# CONFIG=/etc/gpokerbot.yaml
+COFFEE=/usr/lib/poker-terminator/node_modules/.bin/coffee
+DAEMON=/usr/lib/poker-terminator/server.coffee
+# CONFIG=/etc/pokerterminator.yaml
 DAEMON_NAME=poker-terminator
-DAEMON_USER=poker-terminator
-DAEMON_GROUP=poker-terminator
 
 # Include poker-terminator defaults if available
 if [ -f /etc/default/poker-terminator ]; then
     . /etc/default/poker-terminator
 fi
 
-test -x $DAEMON || exit 1
+test -x $COFFEE || exit 1
 
 . /lib/lsb/init-functions
 
 PID=/var/run/$DAEMON_NAME.pid
 
 test_config() {
-    # dummy
+    return 0 # dummy
 }
 
 start() {
-    start-stop-daemon --start --background --chuid $DAEMON_USER:$DAEMON_GROUP \
+    start-stop-daemon --start --background \
         --make-pidfile --pidfile $PID \
-        --exec $DAEMON
+        --exec $COFFEE -- $DAEMON
 }
 
 stop() {
-    start-stop-daemon --stop --quiet --user=$DAEMON_USER --pidfile $PID
+    start-stop-daemon --stop --quiet --pidfile $PID
 }
 
 reload() {
-    start-stop-daemon --stop --signal HUP --quiet --user=$DAEMON_USER --pidfile $PID
+    start-stop-daemon --stop --signal HUP --quiet --pidfile $PID
 }
 
 case "$1" in
