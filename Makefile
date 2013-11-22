@@ -20,7 +20,7 @@ clean:
 install:
 	install -d $(DESTDIR)/usr/lib/poker-terminator/public/ -d $(DESTDIR)/usr/share/poker-terminator/
 	cp -r node_modules $(DESTDIR)/usr/lib/poker-terminator/
-	install -m 644 src/server.coffee $(DESTDIR)/usr/lib/poker-terminator/
+	install -m 644 src/server.coffee src/test.coffee $(DESTDIR)/usr/lib/poker-terminator/
 	install -m 644 pokerterminator.yaml.example $(DESTDIR)/usr/share/poker-terminator/
 	install -m 644 public/* $(DESTDIR)/usr/lib/poker-terminator/public/
 
