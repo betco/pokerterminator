@@ -1,14 +1,20 @@
-setuid: <user>
-setgid: <group>
+# when you start the terminator as root you can drop privileges
+setuid:
+    uid: <user>
+    gid: <group>
 
+# http config
 http:
-    port: 8080
-    static: public/
+    port: 8080                          # port to listen on
+    static: public/                     # static files to serve
 
+# engine.io config
+# find more details on https://github.com/LearnBoost/engine.io-client
 eio:
-    path: /ns.io
-    transports: [polling, websocket]
+    path: /ns.io                        # http path eingine.io will hook into
+    transports: [polling, websocket]    # transports to use
 
+# poker network server
 network:
     address: localhost
-    port: 19387
+    port: 19387                         # msgpack protocl port

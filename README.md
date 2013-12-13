@@ -12,12 +12,12 @@ Config
 ```yaml
 # when you start the terminator as root you can drop privileges
 setuid:
-    uid: hannes
-    gid: hannes
+    uid: <user>
+    gid: <group>
 
 # http config
 http:
-    port: 60000                         # port to listen on
+    port: 8080                          # port to listen on
     static: public/                     # static files to serve
 
 # engine.io config
@@ -29,5 +29,5 @@ eio:
 # poker network server
 network:
     address: localhost
-    port: 19387
+    port: 19387                         # msgpack protocl port
 ```
