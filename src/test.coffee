@@ -29,5 +29,5 @@ s.on 'pkt', (packets) ->
 setTimeout ->
     console.log 'failed!'
     process.exit 1
-, 1000
+, 10000
 
