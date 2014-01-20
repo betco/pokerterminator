@@ -42,9 +42,14 @@ io_server.on 'connection', (io_socket) ->
 
     unpacker = new msgpack.Stream network
     unpacker.addListener 'msg', (m) ->
-        [p_type, p_dict] = m
-        p_dict['type'] = p_type
-        io_socket.send_ns('pkt', [p_dict])
+        try
+            [p_type, p_dict] = m
+            p_dict['type'] = p_type
+            io_socket.send_ns('pkt', [p_dict])
+        catch e
+            console.log 'unpacker.err:', e
+            network.destroy()
+            io_socket.close()
 
     io_socket.on 'pkt', (packets) ->
         for packet in packets
