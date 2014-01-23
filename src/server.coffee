@@ -7,7 +7,7 @@ yaml = require 'js-yaml'
 fs = require 'fs'
 
 # find config
-if fs.existsSync process.argv[process.argv.length-1]
+if process.argv.length > 2 && fs.existsSync process.argv[process.argv.length-1]
     config_path = process.argv[process.argv.length-1]
 else if fs.existsSync '/etc/pokerterminator.yaml'
     config_path = '/etc/pokerterminator.yaml'
